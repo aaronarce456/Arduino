@@ -1,7 +1,7 @@
 //Programmer: Aaron Arce
 //Date: 3.14.2023
 //Program: Fade
-
+//Resource: https://arduinointro.com/projects/2-leds-alternate-fade-effect-using-the-for-loop
 
 /*
   Fade
@@ -30,19 +30,35 @@ void setup() {
   pinMode(ledEleven, OUTPUT);
 }
 
-// the loop routine runs over and over again forever:
 void loop() {
-  // set the brightness of pin 9:
-  analogWrite(ledTen, brightness);
-  analogWrite(ledEleven, brightness);
-
-  // change the brightness for next time through the loop:
-  brightness = brightness + fadeAmount;
-
-  // reverse the direction of the fading at the ends of the fade:
-  if (brightness <= 0 || brightness >= 255) {
-    fadeAmount = -fadeAmount;
+  // fade in from min to max in increments of 5 points:
+  for (int fadeValue = 0 ; fadeValue <= 255; fadeValue = fadeValue+5) {
+    // sets the value (range from 0 to 255):
+    analogWrite(ledEleven, fadeValue);
+    // wait for 30 milliseconds to see the dimming effect
+    delay(30);
   }
-  // wait for 30 milliseconds to see the dimming effect
-  delay(30);
-}
+
+  // fade out from max to min in increments of 5 points:
+  for (int fadeValue = 255 ; fadeValue >= 0; fadeValue = fadeValue-5) {
+    // sets the value (range from 0 to 255):
+    analogWrite(ledEleven, fadeValue);
+    // wait for 30 milliseconds to see the dimming effect
+    delay(30);
+  }
+
+  // fade in from min to max in increments of 5 points:
+  for (int fadeValue = 0 ; fadeValue <= 255; fadeValue = fadeValue+5) {
+    // sets the value (range from 0 to 255):
+    analogWrite(ledTen, fadeValue);
+    // wait for 30 milliseconds to see the dimming effect
+    delay(30);
+  }
+
+  // fade out from max to min in increments of 5 points:
+  for (int fadeValue = 255 ; fadeValue >= 0; fadeValue = fadeValue-5) {
+    // sets the value (range from 0 to 255):
+    analogWrite(ledTen, fadeValue);
+    // wait for 30 milliseconds to see the dimming effect
+    delay(30);
+  }}
