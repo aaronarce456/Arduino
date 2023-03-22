@@ -9,12 +9,12 @@
  *  vehicles that are in your blind spot and turn on a warning light.
  */
 
-#define trigPin 2
-#define echoPin 3
-#define LEDlampRed 4
-#define  LEDlampYellow 5
-#define LEDlampGreen 6 
-#define soundbuzzer 7
+int trigPin = 7;
+int echoPin = 6;
+int LEDlampRed = 9;
+int  LEDlampYellow = 10;
+int LEDlampWhite = 11; 
+int soundbuzzer = 3;
 int sound  = 500;
 
 
