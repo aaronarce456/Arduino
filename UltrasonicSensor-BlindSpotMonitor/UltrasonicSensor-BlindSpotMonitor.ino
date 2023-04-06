@@ -12,7 +12,7 @@
 int trigPin = 7;
 int echoPin = 6;
 int LEDlampRed = 9;
-int  LEDlampYellow = 10;
+int LEDlampYellow = 10;
 int LEDlampWhite = 11; 
 int soundbuzzer = 3;
 int sound  = 500;
@@ -24,49 +24,33 @@ void setup() {
   pinMode(echoPin, INPUT);
   pinMode(LEDlampRed, OUTPUT);
   pinMode(LEDlampYellow,  OUTPUT);
-  pinMode(LEDlampGreen, OUTPUT);
+  pinMode(LEDlampWhite, OUTPUT);
   pinMode(soundbuzzer, OUTPUT);
 }
 void  loop() {
-  long durationindigit, distanceincm;
+  long durationindigit, distanceinft;
   digitalWrite(trigPin, LOW);  
   delayMicroseconds(2);
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
   durationindigit = pulseIn(echoPin, HIGH);
-  distanceincm = (durationindigit/5) / 29.1;
+  distanceinft = (durationindigit/5) / 29.1;
  
-  if (distanceincm < 50) {
-      digitalWrite(LEDlampGreen, HIGH);
-}
-  else {
-      digitalWrite(LEDlampGreen,  LOW);
+  if (distanceinft > 10){
+    Serial.println("We have not detected any car in your Blind Spot - Change Lanes when needed.");
   }
-  
-  if (distance < 20) {
-    digitalWrite(LEDlampYellow,  HIGH);
-}
-  else {
-    digitalWrite(LEDlampYellow,LOW);
-  }
-  if (distance  < 5) {
-    digitalWrite(LEDlampRed, HIGH);
-    sound = 1000;
-}
-  else  {
-    digitalWrite(LEDlampRed,LOW);
-  }
- 
-  if (distanceincm > 5 ||  distanceinsm <= 0){
-    Serial.println("Outside the permissible range of distances");
-    noTone(soundbuzzer);
+
+
+  if (distanceinft <= 10 && distanceinft >= 7) {
+    digitalWrite(LEDlampWhite, HIGH);
+    Serial.println("There is another car within");
+    Serial.print(distanceinft);
+    Serial.println(" feet from your Blind Spot \nGetting Close - Change Lanes with Caution\n");
   }
   else {
-    Serial.print(distance);
-    Serial.println("  cm");
-    tone(buzzer, sound);
+    digitalWrite(LEDlampWhite, LOW);
   }
-  
-  delay(300);
+
+  delay(1000);
 }
